@@ -1,2 +1,84 @@
-# expressions
-compiler332
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+
+void main()
+{
+char inpt[100],operators[20];
+char variables[20][20];
+int num[20],ascii[100]={0};
+int count,i,number=0;
+int j=-1,k=-1,l=-1,n=0;
+int pr[10]={0},m=0;
+
+printf("Enter the expression\n\n");
+scanf ("%[^\n]%*c", inpt);
+
+count = strlen(inpt);
+
+for (i = 0; i < count; ++i)
+{
+ascii[i] = (int)inpt[i];
+}
+
+for(i=0;i<count;++i)
+{
+
+if( isdigit(inpt[i]) )
+{
+while(isdigit(inpt[i]))
+{
+number=10*number+ ascii[i] -'0';
+i++;
+}
+j++;
+num[j]=number;
+number=0;
+}
+
+if( isalpha(inpt[i]) )
+{
+while( isalpha(inpt[i]) || isdigit(inpt[i]) || inpt[i]=='_' )
+{
+k++;
+variables[m][k]=inpt[i];
+i++;
+}
+m++;
+pr[n]=k;
+n++;
+k=-1;
+}
+
+if(inpt[i]=='+'||inpt[i]=='-'||inpt[i]=='/'|| inpt[i]=='*'|| inpt[i]=='='|| inpt[i]=='^')
+{
+l++;
+operators[l]= inpt[i];
+}
+
+}
+
+printf("\nThe keywords are: \n\n");
+for(i=0;i<=j;i++)
+{
+printf("\tlit%d\t%d \n",i+1,num[i]);
+}
+
+printf("\nThe operators are: \n\n");
+for(i=0;i<=l;i++)
+{
+printf("\top%d\t%c\n",i+1,operators[i]);
+}
+
+printf("\nThe variables are: \n\n");
+for(i=0;i<m;i++)
+{
+printf("\n\tid%d\t",i+1);
+for(j=0;j<=pr[i];j++)
+{
+printf("%c",variables[i][j]);
+}
+
+}
+
+}
